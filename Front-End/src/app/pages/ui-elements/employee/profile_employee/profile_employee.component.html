@@ -1,0 +1,331 @@
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="md-tabs card">
+            <div class="user-info">
+                    <div class="col-md-12">
+                      <div class="media-left">
+                        <a href="javascript:;" class="profile-image">
+                          <img class="user-img img-circle" src="/media/elkhafagy/Elkhafagy/Elkhafagy/special/Graduation Project/Final/graduation/src/main/resources/static/image/3.png" alt="user-img" height="40px" width="40px">
+                        </a>
+                      </div>
+                      <div class="media-body row">
+                          <div class="user-title">
+                            <h4>{{fname +" "+ lname }}</h4>
+                          </div>
+                        <div>
+                          <div class="pull-right cover-btn">
+                            <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        <ngb-tabset>
+          <ngb-tab title="Personal Info">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <!-- personal card start -->
+                <div>
+                  <div class="card-header">
+                    <h5 class="card-header-text">About Me</h5>
+                    <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditProfile()">
+                      <i class="icofont {{ editProfileIcon }}"></i>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="view-info" *ngIf="editProfile">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="general-info">
+                            <div class="row">
+                              <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                  <table class="table m-0">
+                                    <tbody>
+                                    <tr>
+                                      <th scope="row">First Name</th>
+                                      <td>{{fname}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Last Name</th>
+                                      <td>{{lname}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Birth Date</th>
+                                      <td>{{date_birth  | date}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Salary</th>
+                                      <td>{{salary}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+                              <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                    <tr>
+                                      <th scope="row">User Name</th>
+                                      <td>{{usrname}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td><a href="javascript:;">{{email}}</a></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Mobile Number</th>
+                                      <td>{{phone}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Date Of Rigistration</th>
+                                      <td>{{reg_dat | date}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+                            </div>
+                            <!-- end of row -->
+                          </div>
+                          <!-- end of general info -->
+                        </div>
+                        <!-- end of col-lg-12 -->
+                      </div>
+                      <!-- end of row -->
+                    </div>
+                    <!-- end of view-info -->
+                    <div class="edit-info" *ngIf="!editProfile">
+                      <div class="row">  
+                        <div class="col-lg-12">
+
+                                <form role="form"#form="ngForm" enctype="multipart/form-data"  (ngSubmit)="update_emp()">
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="fname" required
+                                                #fnamee="ngModel"
+                                                pattern="[a-zA-Z][a-zA-Z ]+"
+                                                ngModel >
+                                                <label for="firstname">First Name</label>
+                                                <div *ngIf="fnamee.touched && fnamee.errors" class="alert alert-danger">
+                                                  <div *ngIf="fnamee.errors?.required">
+                                                      First Name is required 
+                                                  </div>
+                                                  <div *ngIf="fnamee.errors?.pattern">
+                                                          First Name is invalid 
+                                                      </div>
+                                              </div>
+                                              </div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="lname" required
+                                            #lnamee="ngModel"
+                                            pattern="[a-zA-Z][a-zA-Z ]+"
+                                            ngModel >
+                                            <label for="lastname">Last Name</label>
+                                            <div *ngIf="lnamee.touched && lnamee.errors" class="alert alert-danger">
+                                              <div *ngIf="lnamee.errors?.required">
+                                                  Last Name is required 
+                                              </div>
+                                              <div *ngIf="lnamee.errors?.pattern">
+                                                      Last Name is invalid 
+                                                  </div>
+                                          </div>
+                                          </div>
+                                     </div>
+                          
+                          
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <input type="text" class="form-control" id="username" name="username"[(ngModel)]="usrname"required
+                                        #username="ngModel"
+                                        pattern="[a-zA-Z][a-zA-Z ]+"
+                                        ngModel >
+                                        <label for="username">User Name</label>
+                                        <div *ngIf="username.touched && username.errors" class="alert alert-danger">
+                                          <div *ngIf="username.errors?.required">
+                                              UserName is required 
+                                          </div>
+                                          <div *ngIf="username.errors?.pattern">
+                                            UserName is invalid 
+                                              </div>
+                                      </div>
+                                      </div>
+                              </div>
+                          
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" id="email" name="email"[(ngModel)]="email"required
+                                    #em="ngModel"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                    ngModel >
+                                    <label for="email">Email</label>
+                                    <div *ngIf="em.touched && em.errors" class="alert alert-danger">
+                                      <div *ngIf="em.errors?.required">
+                                          Email is required 
+                                      </div>
+                                      <div *ngIf="em.errors?.pattern">
+                                        Email should be like this m@m.com 
+                                          </div>
+                                  </div>
+                                  </div>
+                          </div>
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <span for="photo">Profile Picture </span>
+                                <input type="file" class="form-control" id="photo" name="photo" placeholder="Profile" >
+                              </div>
+                          </div>
+                          
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="salary" required
+                                #sal="ngModel"
+                                pattern="[0-9]*"
+                                ngModel>
+                                <label for="salary">Salary </label>
+                                <div *ngIf="sal.touched && sal.errors" class="alert alert-danger">
+                                  <div *ngIf="sal.errors?.required">
+                                      Salary is required 
+                                  </div>
+                                  <div *ngIf="sal.errors?.pattern">
+                                    Salary is invalid 
+                                      </div>
+                              </div>
+                              </div>
+                          </div>                         
+                          
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="phone" #phon="ngModel"
+                                pattern="[0-9]*"
+                                maxlength="11"
+                                minlength="11"
+                                required ngModel>
+                                <label for="phone">Phone</label>
+                                <div *ngIf="phon.touched && phon.errors" class="alert alert-danger">
+                                  <div *ngIf="phon.errors?.required">
+                                      Phone is required 
+                                  </div>
+                                  <div *ngIf="phon.errors?.pattern || phon.errors?.minlength">
+                                          Phone is invalid 
+                                      </div>
+                              </div>
+                              </div>
+                          </div>
+                          
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text"
+                                class="form-control"
+                                [minDate]="minDate"
+                                [maxDate]="maxDate"
+                                #dp="bsDatepicker"
+                                bsDatepicker [(bsValue)]="bsValue1" [(ngModel)]="date_birth" [ngModelOptions]="{standalone:
+                                  true}">      
+                                <label for="date_birth">Date Of Birth</label>
+                          
+                              </div>
+                          </div>
+                          
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text"
+                                class="form-control"
+                                [minDate]="minDate"
+                                [maxDate]="maxDate"
+                                #dp="bsDatepicker"
+                                bsDatepicker [(bsValue)]="bsValue" [(ngModel)]="reg_dat" [ngModelOptions]="{standalone:
+                                  true}"> 
+                                <label for="date_reg">Date Of Registeration</label>
+                              </div>
+                          </div>
+                                    </div> 
+                                    <div class="text-center">
+                                            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save <i class="ti-save" style="margin-left: 5px"></i></button>
+                                            <!-- <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20">Save</a> -->
+                                            <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a>
+                                          </div>
+                                  </form>
+                          <!-- end of edit info -->
+                        </div>
+                        <!-- end of col-lg-12 -->
+                      </div>
+                      <!-- end of row -->
+                    </div>
+                    <!-- end of edit-info -->
+                  </div>
+                  <!-- end of card-body -->
+                </div>
+                <!-- personal card end-->
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Services">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <!-- info card start -->
+                <div>
+                  <div class="card-header">
+                    <h5 class="card-header-text">Employee Services</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                      <app-card [title]="'Basic Map'" [classHeader]="true"> 
+                          <span class="code-header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias explicabo, magnam totam laudantium saepe voluptates facere ipsam adipisci enim incidunt maiores recusandae optio omnis hic unde laboriosam ducimus at odio.</span>
+                          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                            <agm-marker [latitude]="lat" [longitude]="lng" [label]="'E'" [iconUrl]="testIcon"></agm-marker>
+                            <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+                                <agm-marker *ngFor="let marker of markerss" [latitude]="marker.lat" [longitude]="marker.lng" [label]="'T'">
+                                    <agm-info-window [disableAutoPan]="true">
+                                      <strong><h5>Task Name: </h5>{{marker.name}}</strong>
+                                  </agm-info-window>
+                                </agm-marker>
+                            </agm-marker-cluster>
+                            <agm-marker *ngFor="let marker2 of markerss2" [latitude]="marker2.lat" [longitude]="marker2.lng" [label]="''" [iconUrl]="testIcon2">
+                              <agm-info-window [disableAutoPan]="true">
+                                <strong><h5>Task Name: </h5>{{marker2.name}}</strong>
+                            </agm-info-window>
+                          </agm-marker>
+                          </agm-map>
+                      </app-card>                      
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <div class="card widget-card-1">
+                        <div class="card-block-small">
+                          <i class="fa fa-check-circle bg-c-pink card1-icon" style="height: 50px; width: 50px;"></i>
+                          <span class="text-c-pink f-w-600">Finshed Tasks</span>
+                          <h4>{{finishedTasks}}</h4>
+                          <div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <div class="card widget-card-1">
+                        <div class="card-block-small">
+                          <i class="fa fa-times-circle bg-c-pink card1-icon" style="height: 50px; width: 50px;"></i>
+                          <span class="text-c-pink f-w-600">Unfinshed Tasks</span>
+                          <h4>{{unFinishedTasks}}</h4>
+                          <div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+  

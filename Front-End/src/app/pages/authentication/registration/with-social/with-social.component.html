@@ -1,0 +1,205 @@
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(assets/images/14.gif);">
+                    <img class="img-fluid" style="max-width: 80%;
+					" src="assets/images/logo1.png" alt="Theme-Logo"/>
+                    <span class="login100-form-title-1">
+						Sign UP
+					</span>
+				</div>
+
+				<form class="login100-form validate-form" [formGroup] = "addressForm" (ngSubmit) ="register()">
+                    <div class="in-left">
+                                           
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="CompanyName is required">
+                            <span class="label-input100">Company Name</span>
+                            <input class="input100" type="text" name="compName" placeholder="Name" formControlName="comp_name">
+                            <span class="focus-input100"></span>
+
+                        </div>
+            <div  *ngIf="addressForm.controls['comp_name'].touched">                    
+            <div *ngIf="addressForm.controls['comp_name'].hasError('required')" class="alert alert-danger">
+ 
+ 
+                   This field is required
+     
+     
+                         </div>
+
+                                    
+            <div *ngIf="addressForm.controls['comp_name'].hasError('minlength')" class="alert alert-danger">
+                Please Enter atleat 5 character       
+            </div>
+            <div *ngIf="addressForm.controls['comp_phone'].hasError('pattern')" class="alert alert-danger">
+
+                    Please Enter Correct Name
+
+                </div>
+            </div>           
+<div class="wrap-input100 validate-input m-b-26" data-validate="CompanyPhone is required">
+                            <span class="label-input100">Phone</span>
+                            <input class="input100" type="text" name="compPhone" placeholder="Company Phone" formControlName="comp_phone">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div  *ngIf="addressForm.controls['comp_phone'].touched">  
+                        <div *ngIf="addressForm.controls['comp_phone'].hasError('required')" class="alert alert-danger">
+ 
+ 
+                            This field is required
+              
+              
+                                  </div>
+         
+                                   
+                        <div *ngIf="addressForm.controls['comp_phone'].hasError('minlength')" class="alert alert-danger">
+
+                            Please Enter atleat 5 character
+      
+                        </div>   <div *ngIf="addressForm.controls['comp_phone'].hasError('pattern')" class="alert alert-danger">
+
+                                Please Enter Correct Phone Number
+          
+                            </div>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="CompanyField is required">
+                            <span class="label-input100">Field</span>
+                            <input class="input100" type="text" name="compField" placeholder="Company Field" formControlName="comp_field">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div  *ngIf="addressForm.controls['comp_field'].touched">  
+                        <div *ngIf="addressForm.controls['comp_field'].hasError('required')" class="alert alert-danger">
+ 
+ 
+                            This field is required
+              
+              
+                                  </div>
+                        </div>
+        
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="CompanyLocation is required">
+                            <span class="label-input100">Location</span>
+                            <input class="input100 location" type="text" formControlName="loc" name="username" placeholder="Location" data-toggle="modal" data-target="#myModal" readonly>
+                            <span class="focus-input100"></span>
+                        </div>
+               
+                    </div>
+                    <div class="line"></div>
+                    <div class="in-right">
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="CompanyWebsite is required">
+                            <span class="label-input100">Website</span>
+                            <input class="input100" type="text" name="compWebsite" placeholder="Company Website"formControlName="comp_website">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div  *ngIf="addressForm.controls['comp_website'].touched">  
+                        <div *ngIf="addressForm.controls['comp_website'].hasError('required')" class="alert alert-danger">
+ 
+ 
+                            This field is required
+              
+              
+                                  </div>
+         
+                                   
+                        <div *ngIf="addressForm.controls['comp_website'].hasError('minlength')" class="alert alert-danger">
+                    
+                            Please Enter atleat 5 character
+                        
+                        </div>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="CompanyEmail is required">
+                            <span class="label-input100">E-mail</span>
+                            <input class="input100" type="text" name="compEmail" placeholder="Company Email" formControlName="comp_email">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div  *ngIf="addressForm.controls['comp_email'].touched">  
+                     
+         
+                                                    
+                            <div *ngIf="addressForm.controls['comp_email'].hasError('email')" class="alert alert-danger">
+                               Please Enter correct e_mail
+         
+                            </div>
+                                                    
+                            <div *ngIf=" addressForm.get('comp_email').errors && addressForm.controls['comp_email'].hasError('emailTaken')  " class="alert alert-danger">
+                                email is already taken
+          
+                             </div>
+
+                          
+                            
+                        </div> 
+                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+                            <span class="label-input100">Password</span>
+                            <input class="input100" type="password" name="pass" placeholder="Enter password" formControlName="comp_passwd">
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div  *ngIf="addressForm.controls['comp_passwd'].touched">  
+                        <div *ngIf="addressForm.controls['comp_passwd'].hasError('required')||addressForm.controls['comp_passwd'].hasError('minlength')" class="alert alert-danger">
+
+                            weak password
+                                  </div>
+         
+                                   <div *ngIf="!addressForm.controls['comp_passwd'].hasError('minlength')" class="alert alert-success">
+                            
+                                         strong password 
+                                  </div>
+
+                                    </div>
+
+                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+                            <span class="label-input100">Confirm Password</span>
+                            <input class="input100" type="password" formControlName="comp_passwd" name="confpass" placeholder="Renter password">
+                            <span class="focus-input100"></span>
+                        </div>
+
+                    </div>
+<!--
+					<div class="flex-sb-m w-full p-b-30">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Remember me
+							</label>
+						</div>
+					</div>
+-->
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn"  value="submit" >
+							Register
+						</button>
+              <div class="login-now"> <a href="#"[routerLink]="'/authentication/login'" class="txt1">Or Login Now</a></div>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+    
+    
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header pull-left">
+          <h4 class="modal-title " id="myModalLabel">Pick Task Location
+              <i class="fas fa-location-arrow fa-xs"></i>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [streetViewControl]="true"  (mapClick)="placeMarker($event)">
+              <agm-marker [latitude]="lat" [longitude]="lng">
+                  <agm-info-window>
+                    The Location of Company
+                  </agm-info-window>
+                </agm-marker>
+          </agm-map>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)= "mark()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

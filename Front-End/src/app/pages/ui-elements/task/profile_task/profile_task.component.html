@@ -1,0 +1,228 @@
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+                <!-- personal card start -->
+                <div>
+                  <div class="card-header">
+                    <h5 class="card-header-text">Task Profile</h5>
+                    <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditProfile()">
+                      <i class="icofont {{ editProfileIcon }}"></i>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="view-info" *ngIf="editProfile">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="general-info">
+                            <div class="row">
+                              <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                  <table class="table m-0">
+                                    <tbody>
+                                    <tr>
+                                      <th scope="row">Task Name</th>
+                                      <td>{{task_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Client Name</th>
+                                      <td>{{client_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Employee Name</th>
+                                      <td>{{emp_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">State</th>
+                                      <td>{{task_State}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+                              <div class="col-lg-12 col-xl-6">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <tbody>
+                                    <tr>
+                                      <th scope="row">Location</th>
+                                      <td>{{task_address}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Start Date</th>
+                                      <td>{{start_date}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Expired Data</th>
+                                      <td>{{exp_date}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <!-- end of table col-lg-6 -->
+                            </div>
+                            <!-- end of row -->
+                          </div>
+                          <!-- end of general info -->
+                        </div>
+                        <!-- end of col-lg-12 -->
+                      </div>
+                      <!-- end of row -->
+                    </div>
+                    <!-- end of view-info -->
+                    <div class="edit-info" *ngIf="!editProfile">
+                      <div class="row">  
+                        <div class="col-lg-12">
+
+                                <form role="form"  #form="ngForm" enctype="multipart/form-data">
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <input type="text"  class="form-control"required
+                                                #taskname="ngModel"
+                                                pattern="[a-zA-Z][a-zA-Z ]+"
+                                                ngModel id="firstname" name="firstname" [(ngModel)]="task_name" [ngModelOptions]="{standalone: true}" value={{task_name}}>
+                                                <label for="firstname">Task Name</label>
+                                                <div *ngIf="taskname.touched && taskname.errors" class="alert alert-danger">
+                                                  <div *ngIf="taskname.errors?.required">
+                                                      Task Name is required 
+                                                  </div>
+                                                  <div *ngIf="taskname.errors?.pattern">
+                                                          Task Name is invalid 
+                                                      </div>
+                                              </div>
+                                              </div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="form-group">
+                                            <select class="form-control" value={{emp_id}} name="employeeName" disabled="true" placeholder="Emoloyee Name"  [(ngModel)]="emp_id" [ngModelOptions]="{standalone: true}">
+                                              <option value="" disabled="true">Choose Employee</option>
+                                              <option *ngFor="let item of empls "  [ngValue]="emp_id"  >{{item.emp_email}}</option>
+                                
+                                            </select>
+                                          </div>
+                                     </div>
+                                     <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <input type="text" value={{emp_State}} class="form-control" id="email" name="state" [(ngModel)]="task_State">
+                                        <label for="state">State</label>
+                                      </div>
+                              </div>
+                          
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <select class="form-control" value={{client_name}} name="clientName" disabled="true" [(ngModel)]="client_name" [ngModelOptions]="{standalone: true}" >
+                                          <option value="" disabled="true">Choose Client</option>
+                                          <option *ngFor="let item of clients " [ngValue]="client_name" > {{item.client_fname}}{{item.client_lname}}  {{item.client_phone}}</option>
+                                          
+                                        </select>
+                                      </div>
+                              </div>
+                          
+
+                      
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text"
+                                  value={{start_date}}
+                                [(ngModel)]="start_date_u"
+                                [ngModelOptions]="{standalone: true}"
+                                class="form-control"
+                                [minDate]="minDate"
+                                [maxDate]="maxDate"
+                                #dp="bsDatepicker"
+                                bsDatepicker [(bsValue)]="bsValue" readonly required #sdate="ngModel"
+                                ngMode>      
+                                <label for="date_birth">Start Date</label>
+                                <div *ngIf="sdate.touched && sdate.errors" class="alert alert-danger">
+                                  <div *ngIf="sdate.errors?.required">
+                                      Start Date Required
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                          
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="text"
+                                value={{exp_date}}
+                                [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="exp_date_u"
+                                class="form-control"
+                                [minDate]="minDate"
+                                [maxDate]="maxDate"
+                                #dp="bsDatepicker"
+                                bsDatepicker [(bsValue)]="bsValue1" readonly required #edate="ngModel"
+                                ngModel> 
+                                <label for="date_reg">End Date</label>
+                                <div *ngIf="edate.touched && edate.errors" class="alert alert-danger">
+                                  <div *ngIf="edate.errors?.required">
+                                      End Date Required
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <input type="text" class="form-control" id="salary" name="salary" data-toggle="modal" data-target="#myModal" [(ngModel)]="loc"readonly required #loca="ngModel"
+                              ngModel>
+                              <label for="salary">Location </label>
+                              <div *ngIf="loca.touched && loca.errors" class="alert alert-danger">
+                                <div *ngIf="loca.errors?.required">
+                                   Location Required
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                         
+                                    </div> 
+                                    <div class="text-center">
+                                            <button  type="submit" class="btn btn-primary"[disabled]="form.invalid" (click)="update_task()">Save <i class="ti-save" style="margin-left: 5px"></i></button>
+                                            <!-- <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20">Save</a> -->
+                                            <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a>
+                                          </div>
+                                  </form>
+                          <!-- end of edit info -->
+                        </div>
+                        <!-- end of col-lg-12 -->
+                      </div>
+                      <!-- end of row -->
+                    </div>
+                    <!-- end of edit-info -->
+                  </div>
+                  <!-- end of card-body -->
+                </div>
+                <!-- personal card end-->
+      </div>
+    </div>
+  </div>
+  
+
+  
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header pull-left">
+        <h4 class="modal-title " id="myModalLabel">Pick Task Location
+            <i class="fas fa-location-arrow fa-xs"></i>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [streetViewControl]="true"  (mapClick)="placeMarker($event)">
+            <agm-marker [latitude]="lat" [longitude]="lng">
+                <agm-info-window>
+                  This Is Task Location
+                </agm-info-window>
+              </agm-marker>
+        </agm-map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)= "mark()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

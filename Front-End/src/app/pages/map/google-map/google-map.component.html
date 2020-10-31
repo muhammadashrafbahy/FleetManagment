@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+      <app-card [title]="'Basic Map'" [classHeader]="true">
+        <span class="code-header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias explicabo, magnam totam laudantium saepe voluptates facere ipsam adipisci enim incidunt maiores recusandae optio omnis hic unde laboriosam ducimus at odio.</span>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+             <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+              <agm-marker *ngFor="let marker of markerss" [latitude]="marker.lat" [longitude]="marker.lng" [label]="'E'">
+                <agm-info-window [disableAutoPan]="true">
+                  <strong (click)="profile(marker.id)" style="cursor: pointer;" title="Go To Profile"><h5>UserName: </h5>{{marker.userName}}</strong>
+              </agm-info-window>
+              </agm-marker>
+            </agm-marker-cluster>
+        </agm-map>
+      </app-card>
+    </div>
+  </div>
+
+<div class="row">
+  <!-- card1 start -->
+  <div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="fa fa-user bg-c-blue card1-icon"></i>
+        <span class="text-c-blue f-w-600" >All Employee</span>
+        <h4>{{empSize}}</h4>
+        <div>
+        <span class="f-left m-t-10 text-muted" [routerLink]="['/employee/all-employee']" style="cursor: pointer;">
+         <i class="text-c-blue f-16 fa fa-angle-double-left m-r-10"></i>Get more Details
+          
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card1 end -->
+  <!-- card2 start -->
+  <div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="fa fa-address-card bg-c-pink card1-icon"></i>
+        <span class="text-c-pink f-w-600">All Clients</span>
+        <h4>{{clientSize}}</h4>
+        <div>
+          <span class="f-left m-t-10 text-muted" [routerLink]="['/client/all-client']" style="cursor: pointer;">
+            <i class="text-c-pink f-16 fa fa-angle-double-left m-r-10"></i>Get more Details
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card2 end -->
+  <!-- card2 start -->
+  <div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="fa fa-tasks bg-c-pink card1-icon"></i>
+        <span class="text-c-pink f-w-600">All Tasks</span>
+        <h4>{{taskSize}}</h4>
+        <div>
+          <span class="f-left m-t-10 text-muted" [routerLink]="['/task/all-tasks']" style="cursor: pointer;">
+            <i class="text-c-pink f-16 fa fa-angle-double-left m-r-10"></i>Get more Details
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card2 end -->
+
+  <!-- card4 start -->
+  <div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="fa fa-calendar-alt bg-c-yellow card1-icon"></i>
+        <span class="text-c-yellow f-w-600">Tasks Today</span>
+        <h4>{{todayTask}}</h4>
+        <div>
+          <span class="f-left m-t-10 text-muted">
+            <i class="text-c-yellow f-16 fa fa-angle-double-left m-r-10"></i>Just update
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card4 end -->
+
+
+

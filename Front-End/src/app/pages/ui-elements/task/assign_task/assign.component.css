@@ -1,0 +1,16 @@
+table {
+  border:1px solid #000;
+}
+thead tr{
+  background-color:#303549;
+  color:#FFF;
+  border:1px solid #000;
+
+}
+tbody tr td{
+  border:1px solid rgb(150, 150, 150);
+  color:#303549;
+}
+.t-menu{
+  width:15px;
+}

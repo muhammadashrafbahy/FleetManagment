@@ -1,0 +1,134 @@
+<div class="form card">
+  <div class="card-header">
+    <h4 class="card-header-text">Add New Task</h4>
+    <button id="edit-info-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditAbout()">
+      <i class="ti-shopping-cart"></i>
+    </button>
+  </div>
+
+  <form role="form" #form="ngForm">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group"> 
+           <input type="text" class="form-control" required
+           #taskname="ngModel"
+           pattern="[a-zA-Z][a-zA-Z ]+"
+           ngModel name="taskname" id="taskname" [(ngModel)]="task_name" [ngModelOptions]="{standalone: true}">
+          <label for="taskname">Task Name</label>
+          <div *ngIf="taskname.touched && taskname.errors" class="alert alert-danger">
+            <div *ngIf="taskname.errors?.required">
+                Task Name is required 
+            </div>
+            <div *ngIf="taskname.errors?.pattern">
+                    Task Name is invalid 
+                </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <div class="col-xs-5 selectContainer">
+
+            <select class="form-control" name="clientName"(change)="selectName()" [(ngModel)]="client_name" [ngModelOptions]="{standalone: true}" #client="ngModel"
+            ngModel>
+              <option value="" selected disabled="true">Choose Client</option>
+              <option *ngFor="let item of clients " [ngValue]="item.client_phone"  > {{item.client_fname}} {{item.client_lname}}{{item.client_phone}}</option>
+            </select>
+            <div *ngIf="client.touched && client.errors" class="alert alert-danger">
+              <div *ngIf="client.errors?.required">
+                client is required 
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+        <!-- <input type="text" class="form-control" [(ngModel)]="exp_date"   [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue2"> -->
+        <input type="text" class="form-control" [(ngModel)]="exp_date"   [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" readonly required #edate="ngModel"
+        ngModel>
+          <label for="tasklocation">End Date</label>
+          <div *ngIf="edate.touched && edate.errors" class="alert alert-danger">
+            <div *ngIf="edate.errors?.required">
+                End Date Required
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <div class="col-xs-5 selectContainer">
+            <select class="form-control" name="employeeName" placeholder="Emoloyee Name" (change)="selectName()" [(ngModel)]="emp_id_str" [ngModelOptions]="{standalone: true}">
+              <option value="" disabled="true">Choose Employee</option>
+              <option *ngFor="let item of empls " [ngValue]="item.emp_id"  >{{item.emp_email}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-12 col-md-6 form-group">
+        <!-- <input type="text" class="form-control" [(ngModel)]="start_date" [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue1"> -->
+        <input type="text" class="form-control" [(ngModel)]="start_date" [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" readonly required #sdate="ngModel"
+        ngModel>
+        <label for="tasklocation">Start Date</label>
+        <div *ngIf="sdate.touched && sdate.errors" class="alert alert-danger">
+          <div *ngIf="sdate.errors?.required">
+              Start Date Required
+          </div>
+      </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" class="form-control location" [(ngModel)]="loc"  [ngModelOptions]="{standalone: true}"  id="tasklocation" data-toggle="modal" data-target="#myModal" readonly required #loca="ngModel"
+          ngModel>
+          <label for="tasklocation">Task Location</label>
+          <div *ngIf="loca.touched && loca.errors" class="alert alert-danger">
+            <div *ngIf="loca.errors?.required">
+               Location Required
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+            <h6 for="desc" style="margin-bottom: 10px">Description</h6>
+          <textarea class="form-control text-area" id="desc"[(ngModel)]="task_desc" [ngModelOptions]="{standalone: true}"></textarea>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid"  (click)="add_task()">Submit
+      <i class="ti-save" style="margin-left: 5px"></i>
+    </button>
+  </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header pull-left">
+        <h4 class="modal-title " id="myModalLabel">Pick Task Location
+            <i class="fas fa-location-arrow fa-xs"></i>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [streetViewControl]="true"  (mapClick)="placeMarker($event)">
+            <agm-marker [latitude]="lat" [longitude]="lng">
+                <agm-info-window>
+                  This Is Task Location
+                </agm-info-window>
+              </agm-marker>
+        </agm-map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)= "mark()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

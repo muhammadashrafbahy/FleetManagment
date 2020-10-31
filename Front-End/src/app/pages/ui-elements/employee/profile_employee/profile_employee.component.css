@@ -1,0 +1,50 @@
+.text-area{
+    height: 85px;
+  }
+  form input:focus{
+    outline: none;
+  }
+  
+  input[type="text"],input[type="password"]{
+    background: transparent;
+    z-index: 1;
+    margin-bottom: 35px;
+    padding: 10px 10px;
+  }
+  .form-control{
+    margin-bottom: 35px;
+  }
+  label{
+    position: absolute;
+    left: 16px;
+    top: -25px;
+    color: #303549;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+  
+  }
+  input[type="text"]:focus + label,
+  input[type="password"]:focus  + label{
+    left: 16px;
+    top: -25px;
+    color: #303549;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+  
+  }
+  .text-area:focus + label {
+    left: 16px;
+    top: -25px;
+    color: #303549;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+  
+  }
+  .has-data label{
+    left: 16px;
+    top: -25px;
+    color: #303549;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+  }
+  

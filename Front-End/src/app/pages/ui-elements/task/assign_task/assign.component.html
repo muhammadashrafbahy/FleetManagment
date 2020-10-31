@@ -1,0 +1,32 @@
+
+    <div class="form card">
+        <div class="card-header">
+            <h4 class="card-header-text">Assign Task to New Employee</h4>
+            <button id="edit-info-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditAbout()">
+              <i class="ti-shopping-cart"></i>
+            </button>
+          </div>
+
+      <form role="form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Task Name :</label>
+                    <div class="col-xs-4 selectContainer">
+                        <select class="form-control" name="task" placeholder="Tasks Name"  [(ngModel)]="tasks_id" [ngModelOptions]="{standalone: true}">
+                            <option value="" disabled="true">Choose task</option>
+                            <option *ngFor="let item of tasks " [ngValue]="item.task_id"  >{{item.task_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Employee Name :</label>
+                    <div class="col-xs-4 selectContainer">
+                        <select class="form-control" name="employee" placeholder="Employe Name"  [(ngModel)]="emps_id" [ngModelOptions]="{standalone: true}">
+                            <option value="" disabled="true">Choose employee</option>
+                            <option *ngFor="let item of empls " [ngValue]="item.emp_id"  >{{item.emp_email}}</option>
+                        </select>
+                    </div>
+                </div>
+          <button type="submit" class="btn btn-primary"  (click)="assigTask()">Submit <i class="ti-save" style="margin-left: 5px"></i></button>
+      </form>
+    </div>
+

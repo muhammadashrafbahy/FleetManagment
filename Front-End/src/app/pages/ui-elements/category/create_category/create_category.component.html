@@ -1,0 +1,35 @@
+
+    <div class="form card">
+        <div class="card-header">
+            <h4 class="card-header-text">Add New Category</h4>
+            <button id="edit-info-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditAbout()">
+              <i class="ti-shopping-cart"></i>
+            </button>
+          </div>
+
+      <form role="form" #frm="ngForm" (ngSubmit)="addCategory()">
+          <div class="row">
+            <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="category" required
+                      #category="ngModel"
+                      pattern="[a-zA-Z][a-zA-Z ]+"
+                      ngModel name="category"[(ngModel)]="cat.categ_type" >
+                      <label for="category">Category Name</label>
+                      <div *ngIf="category.touched && category.errors" class="alert alert-danger">
+                        <div *ngIf="category.errors?.required">
+                          category is required 
+                        </div>
+                        <div *ngIf="category.errors?.pattern">
+                          category is invalid 
+                            </div>
+                    </div>
+                    </div>
+
+            </div>
+          </div>
+       
+          <button type="submit" class="btn btn-primary" [disabled]="frm.invalid">Submit <i class="ti-save" style="margin-left: 5px"></i></button>
+        </form>
+      </div>
+

@@ -1,0 +1,205 @@
+
+  <div class="form card">
+        <div class="card-header">
+            <h4 class="card-header-text">Add New Employee</h4>
+            <button id="edit-info-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditAbout()">
+              <i class="ti-shopping-cart"></i>
+            </button>
+          </div>
+
+      <form role="form" #form="ngForm" enctype="multipart/form-data" (ngSubmit)="create_emp()">
+          <div class="row">
+            <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="emp_fname" [ngModelOptions]="{standalone:
+                        true}" required
+                        #fname="ngModel"
+                        pattern="[a-zA-Z][a-zA-Z ]+"
+                        ngModel  >
+                      <label for="firstname">First Name</label>
+                      <div *ngIf="fname.touched && fname.errors" class="alert alert-danger">
+                        <div *ngIf="fname.errors?.required">
+                            First Name is required 
+                        </div>
+                        <div *ngIf="fname.errors?.pattern">
+                                First Name is invalid 
+                            </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="emp_lname" [ngModelOptions]="{standalone:
+                    true}"required
+                    #lname="ngModel"
+                    pattern="[a-zA-Z][a-zA-Z ]+"
+                    ngModel  >
+                  <label for="lastname">Last Name</label>
+                  <div *ngIf="lname.touched && lname.errors" class="alert alert-danger">
+                    <div *ngIf="lname.errors?.required">
+                        Last Name is required 
+                    </div>
+                    <div *ngIf="lname.errors?.pattern">
+                            Last Name is invalid 
+                        </div>
+                </div>
+                </div>
+           </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="emp_username" [ngModelOptions]="{standalone:
+                true}" required
+                #username="ngModel"
+                pattern="[a-zA-Z][a-zA-Z ]+"
+                ngModel >
+              <label for="username">User Name</label>
+              <div *ngIf="username.touched && username.errors" class="alert alert-danger">
+                <div *ngIf="username.errors?.required">
+                    UserName is required 
+                </div>
+                <div *ngIf="username.errors?.pattern">
+                  UserName is invalid 
+                    </div>
+            </div>
+            </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="email" name="email" [(ngModel)]="emp_email" [ngModelOptions]="{standalone:
+            true}"  required
+            #email="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            ngModel >
+          <label for="email">Email</label>
+          <div *ngIf="email.touched && email.errors" class="alert alert-danger">
+            <div *ngIf="email.errors?.required">
+                Email is required 
+            </div>
+            <div *ngIf="email.errors?.pattern">
+              Email should be like this m@m.com 
+                </div>
+        </div>
+        </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="password" class="form-control" id="password" name="password"[(ngModel)]="emp_passwd" [ngModelOptions]="{standalone:
+        true}" required
+        #pass="ngModel"
+        ngModel>
+      <label for="password">Password</label>
+      <div *ngIf="pass.touched && pass.errors" class="alert alert-danger">
+        <div *ngIf="pass.errors?.required">
+            Password is required
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="password" class="form-control" id="confirm_password" name="confirm_password"[(ngModel)]="emp_passwd" [ngModelOptions]="{standalone:
+        true}"required
+        #cpass="ngModel"
+        ngModel>
+      <label for="confirm_password">Confirm Password</label>
+      <div *ngIf="cpass.touched && cpass.errors" class="alert alert-danger">
+        <div *ngIf="cpass.errors?.required">
+            Confirm Password is required
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- not used until now-->
+<div class="col-lg-6">
+    <div class="form-group">
+      <span for="photo" class="profile">Profile Picture</span>
+      <input type="file" class="form-control" id="photo" name="photo" placeholder="Profile" (change)="UploadImageService.fileChangeEvent($event)">
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="text" class="form-control" id="salary" name="salary"[(ngModel)]="emp_salary" [ngModelOptions]="{standalone:
+        true}"required
+        #sal="ngModel"
+        pattern="[0-9]*"
+        ngModel>
+      <label for="salary">Salary </label>
+      <div *ngIf="sal.touched && sal.errors" class="alert alert-danger">
+        <div *ngIf="sal.errors?.required">
+            Salary is required 
+        </div>
+        <div *ngIf="sal.errors?.pattern">
+          Salary is invalid 
+            </div>
+    </div>
+    </div>
+</div>
+<!-- not used untile now-->
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="text" class="form-control" id="address" name="address">
+      <label for="address">Address</label>
+
+    </div>
+</div>
+
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="text" class="form-control" id="phone" name="phone"[(ngModel)]="emp_phone" [ngModelOptions]="{standalone:
+        true}"#phone="ngModel"
+        pattern="[0-9]*"
+        maxlength="11"
+        minlength="11"
+        required ngModel>
+      <label for="phone">Phone</label>
+      <div *ngIf="phone.touched && phone.errors" class="alert alert-danger">
+        <div *ngIf="phone.errors?.required">
+            Phone is required 
+        </div>
+        <div *ngIf="phone.errors?.pattern || phone.errors?.minlength">
+                Phone is invalid 
+            </div>
+    </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      #dp="bsDatepicker"
+      bsDatepicker [(bsValue)]="bsValue" [(ngModel)]="emp_Bdate" [ngModelOptions]="{standalone:
+        true}">      
+      <label for="date_birth">Date Of Birth</label>
+
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      #dp="bsDatepicker"
+      bsDatepicker [(bsValue)]="bsValue1"[(ngModel)]="emp_Regist_date" [ngModelOptions]="{standalone:
+   true}"> 
+      <label for="date_reg">Date Of Registeration</label>
+    </div>
+</div>
+          </div> 
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid" >Submit <i class="ti-save" style="margin-left: 5px"></i></button>
+        </form>
+      </div>
+
+

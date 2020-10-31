@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-md-12">
+      <!-- contact data table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">Tasks</h5></div>
+            <div class="card-body contact-details">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-4">
+                        <div>
+                            <label class="label-control">Show
+                                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+                                    <option [ngValue]="5" selected>5</option>
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select>
+                                entries
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div>
+                            <label>From:
+<input type="text" class="form-control input-sm full-data-search" [(ngModel)]="start_date" [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue1" placeholder="Start Date">                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div>
+                            <label>To:
+                                <input type="text" class="form-control input-sm full-data-search" [(ngModel)]="end_date"    [ngModelOptions]="{standalone: true}" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue2" placeholder="End Date">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="search_date()" type="button">
+                                      <img src="assets/images/search.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" (click)="clear()" type="button">
+                                        <img src="assets/images/search.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                      </button>
+                                  </div>
+                            
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div>
+                            <label>Search
+                                <input type="search" [(ngModel)]="emp_filterQuery" class="form-control input-sm full-data-search" placeholder="Name or ClientName or EmployeeName ">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel-heading">User information</div>-->
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered full-data-table" [mfData]="data | employeeFilter : emp_filterQuery " #mf="mfDataTable"
+                           [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                        <thead>
+                        <tr>
+                            
+                            <th>
+                                <mfDefaultSorter  by="position">Task Name</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="office">Task Date</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter  by="age">Client Phone </mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="start-date">Employee Name</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="salary">Task Address</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter>Action</mfDefaultSorter>
+                            </th>
+                        </tr>
+                        <tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of mf.data">
+                            
+                            <td>{{item.task_name}}</td>
+                            <td>{{item.exp_date}}</td>
+                            <td>{{item.client_name}}</td>
+                            <td>{{item.emp_name}}</td>
+                            <td>{{item.task_address}}</td>
+                            <td ngbDropdown>
+                                <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none contact-menu">
+                                   
+                                    <a class="dropdown-item" (click)="delete_task(item.task_id)"><i class="icofont icofont-ui-delete"></i>Delete</a>
+                                    <a class="dropdown-item"  [routerLink]="['/task/profile-tasks',{id:item.task_id}]"><i class="icofont icofont-eye-alt"></i>View</a>
+                                    <!--<a class="dropdown-item" href="javascript:;"><i class="icofont icofont-tasks-alt"></i>Project</a>-->
+                                    <!--<a class="dropdown-item" href="javascript:;"><i class="icofont icofont-ui-note"></i>Notes</a>-->
+                                    <!--<a class="dropdown-item" href="javascript:;"><i class="icofont icofont-eye-alt"></i>Activity</a>-->
+                                    <!--<a class="dropdown-item" href="javascript:;"><i class="icofont icofont-badge"></i>Schedule</a>-->
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Task Date</th>
+                            <th>Client Phone </th>
+                            <th>Employee Name</th>
+                            <th>Task Address</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- contact data table card end -->
+    </div>
+  </div>

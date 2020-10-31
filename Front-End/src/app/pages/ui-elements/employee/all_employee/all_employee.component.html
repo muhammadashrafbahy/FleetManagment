@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-12">
+      <!-- contact data table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">Employees</h5></div>
+            <div class="card-body contact-details">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+                        <div>
+                            <label class="label-control">Show
+                                <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+                                    <option [ngValue]="5" selected>5</option>
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select>
+                                entries
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div style="text-align: right;">
+                            <label>Search:
+                                <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Search name">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel-heading">User information</div>-->
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                           [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                        <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter  by="name">ID</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter  by="position">User Name</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="office">Email</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="office">Phone Number</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter>Action</mfDefaultSorter>
+                            </th>
+                        </tr>
+                        <tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of mf.data">
+                            <td>{{item.emp_id}}</td>
+                            <td>{{item.emp_username}}</td>
+                            <td>{{item.emp_email}}</td>
+                            <td>{{item.emp_phone}}</td>
+                            <td ngbDropdown>
+                                <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right b-none contact-menu">
+                                    <a class="dropdown-item" href="javascript:;" (click)="delete_emp(item)"><i class="icofont icofont-ui-delete"></i>Delete</a>
+                                    <a class="dropdown-item" href="javascript:;"  (click)="view_emp(item)"><i class="icofont icofont-eye-alt"></i>View</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+      <!-- contact data table card end -->
+    </div>
+  </div>

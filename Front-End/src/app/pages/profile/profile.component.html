@@ -1,0 +1,225 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-card [title]="'Basic Map'" [classHeader]="true">
+      <span class="code-header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias explicabo, magnam totam laudantium saepe voluptates
+        facere ipsam adipisci enim incidunt maiores recusandae optio omnis hic unde laboriosam ducimus at odio.</span>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
+          <agm-info-window [disableAutoPan]="true">
+            Hi, this is the content of the
+            <strong>info window</strong>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <!-- card1 start -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text">Profile</h5>
+        <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditProfile()">
+          <i class="icofont icofont-edit"></i>
+        </button>
+      </div>
+      
+      <div class="card-body">
+        <div class="view-info" *ngIf="editProfile">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                
+                <div class="row">
+                  <div class="col-lg-12 col-xl-6">
+                    <div class="table-responsive">
+                      <table class="table m-0">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Company Name</th>
+                            <td>{{comp_name}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Company Field</th>
+                            <td>{{comp_field}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Company Phone</th>
+                            <td>{{comp_phone}}</td>
+                          </tr>
+                          <tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- end of table col-lg-6 -->
+                  <div class="col-lg-12 col-xl-6">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Email</th>
+                            <td>
+                              <a href="javascript:;">{{comp_email}}</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Company Address</th>
+                            <td>{{comp_address}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Website</th>
+                            <td>
+                              <a href="javascript:;">{{comp_website}}</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- end of table col-lg-6 -->
+                </div>
+                <!-- end of row -->
+              </div>
+              <!-- end of general info -->
+            </div>
+            <!-- end of col-lg-12 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of view-info -->
+        <div class="edit-info" *ngIf="!editProfile">
+          <div class="row">
+            <div class="col-lg-12">
+              <form role="form" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="comp_name" 
+                      #compname="ngModel"
+                      pattern="[a-zA-Z][a-zA-Z ]+"
+                      minlength="5"
+                      name="companyName"  [(ngModel)]="comp_name" value={{comp_name}}  >
+                      <label for="companyName">Company Name</label>
+
+                      <div *ngIf="compname.touched  && compname.errors" class="alert alert-danger">
+                        <div *ngIf="compname.errors?.required">
+                            Company Name is required 
+                        </div>
+                        <div *ngIf="compname.errors?.pattern">
+                                Company  Name is invalid 
+                            </div>
+                            <div *ngIf="compname.errors?.minlength">
+                              Company  name must at least 5 character 
+                          </div>
+                           </div>
+
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="companyphone"
+                      #companyphone="ngModel"
+                      pattern="[0-9]*"
+                      minlength="5"
+                      name="companyPhone"  [(ngModel)]="comp_phone" value={{comp_phone}}>
+                      <label for="companyPhone">Company Phone</label>
+
+                      <div *ngIf="companyphone.touched  && companyphone.errors" class="alert alert-danger">
+                        <div *ngIf="companyphone.errors?.required">
+                            Company phone is required 
+                        </div>
+                        <div *ngIf="companyphone.errors?.pattern">
+                                Company  phone is invalid 
+                            </div>
+                            <div *ngIf="companyphone.errors?.minlength">
+                              Company  phone must at least 5 character 
+                          </div>
+                           </div>
+
+                    </div> 
+                  </div>
+
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="field" name="field" 
+                      #companyfield="ngModel"
+                      minlength="5"
+                      [(ngModel)]="comp_field" value={{comp_field}}>
+                      <label for="field">Company Field</label>
+
+                      <div *ngIf="companyfield.touched  && companyfield.errors" class="alert alert-danger">
+                        <div *ngIf="companyfield.errors?.required">
+                            Company Field is required 
+                        </div>
+                            <div *ngIf="companyfield.errors?.minlength">
+                              Company  Field must at least 5 character 
+                          </div>
+                           </div>
+
+
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" disabled=true id="email" name="email"  [(ngModel)]="comp_email" value={{comp_email}}>
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="password"
+                      #companypasswd="ngModel"
+                      minlength="5"
+                      name="password"  [(ngModel)]="comp_passwd" value={{comp_passwd}} >
+                      <label for="password">Password</label>
+
+                      <div *ngIf="companypasswd.touched  && companypasswd.errors" class="alert alert-danger">
+                        <div *ngIf="companypasswd.errors?.required">
+                            Company Password is required 
+                        </div>
+                          <div *ngIf="companypasswd.errors?.minlength">
+                              Company  Password must at least 5 character 
+                          </div>
+                        
+                           </div>
+
+                    </div>
+                  </div>
+
+                
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" disabled="true" id="website" name="website"  [(ngModel)]="comp_website" value={{comp_website}}> 
+                      <label for="website">Website</label>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary" (click)="update()">Save
+                    <i class="ti-save" style="margin-left: 5px"></i>
+                  </button>
+                  <!-- <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20">Save</a> -->
+                  <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a>
+                </div>
+              </form>
+              <!-- end of edit info -->
+            </div>
+            <!-- end of col-lg-12 -->
+          </div>
+          <!-- end of row -->
+        </div>
+        <!-- end of edit-info -->
+      </div>
+    </div>
+
+  </div>
+  <!-- card1 end -->
